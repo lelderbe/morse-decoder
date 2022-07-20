@@ -37,23 +37,23 @@ const MORSE_TABLE = {
     '-----': '0',
 };
 
-function decode(input) {
-    function getLetter(input) {
-        const symbols = { '00': '', 10: '.', 11: '-' };
-        const key = [];
+function getLetter(input) {
+    const symbols = { '00': '', 10: '.', 11: '-' };
 
-        if (input === '**********') {
-            return ' ';
-        }
-
-        for (let i = 0; i < input.length; i += 2) {
-            const part = input.slice(i, i + 2);
-            key.push(symbols[part]);
-        }
-
-        return MORSE_TABLE[key.join('')];
+    if (input === '**********') {
+        return ' ';
     }
 
+    const key = [];
+    for (let i = 0; i < input.length; i += 2) {
+        const part = input.slice(i, i + 2);
+        key.push(symbols[part]);
+    }
+
+    return MORSE_TABLE[key.join('')];
+}
+
+function decode(input) {
     const decodedText = [];
 
     for (let i = 0; i < input.length; i += 10) {
